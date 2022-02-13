@@ -17,7 +17,9 @@ function parse_link_header(header: string, host_url: string | undefined) {
 
     links[name] = url.replace(
       "https://api.github.com",
-      `${host_url}:${process.env.PORT}/api`
+      process.env.NODE_ENV === "production"
+        ? `${host_url}/api`
+        : `${host_url}:${process.env.PORT}/api`
     );
   }
 
